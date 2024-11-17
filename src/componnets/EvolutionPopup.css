@@ -1,0 +1,16 @@
+.pokemonEvolutionPopup{
+    cursor: none;
+    .hide{
+        display: none;
+    }
+    .show{
+        background-color: #1a1a1a;
+        position: fixed; /* Floating above */
+        transition: transform 0.23s; /* Sticking effect */
+        pointer-events: none; /* Allow clicking trough the div */
+        border-radius: 10px;
+        padding: 0px 10px;
+    }
+
+
+}

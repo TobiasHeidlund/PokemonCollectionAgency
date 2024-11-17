@@ -1,0 +1,33 @@
+.pokemonGroup{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    align-content: center;
+    justify-content: space-around;
+    div{
+    }
+}
+.sectionmain{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 3rem;
+}
+.accord{
+    width: 300px;
+    text-align: center;
+    .typ{
+        text-align: center;
+        width: 100%;
+    }
+}
+.topRow{
+    display: flex;
+    svg{
+        height: 100%;
+        width: 3rem;
+        border-radius: 1rem;
+        border: 1px solid white;
+    }
+    gap: 1rem;
+}

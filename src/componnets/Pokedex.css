@@ -1,0 +1,13 @@
+.PokedexItem{
+    display: flex;
+    justify-content: space-between;
+    p{
+        width: 8rem;
+    }
+    .num{
+        width: 1rem;
+    }
+    .sum{
+        height: 2rem;
+    }
+}
