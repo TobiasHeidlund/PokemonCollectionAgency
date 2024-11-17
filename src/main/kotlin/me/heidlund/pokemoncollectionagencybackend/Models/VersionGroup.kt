@@ -1,6 +1,6 @@
 package me.heidlund.pokemoncollectionagencybackend.Models
 
-import com.squareup.moshi.JsonClass
+
 import jakarta.persistence.*
 import lombok.AllArgsConstructor
 import lombok.Data

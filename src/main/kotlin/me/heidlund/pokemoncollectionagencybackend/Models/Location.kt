@@ -1,6 +1,5 @@
 package me.heidlund.pokemoncollectionagencybackend.Models
 
-import com.squareup.moshi.JsonClass
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
