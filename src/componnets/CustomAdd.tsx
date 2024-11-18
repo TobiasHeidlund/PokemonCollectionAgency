@@ -1,9 +1,8 @@
 import AddIcon from "@mui/icons-material/Add";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, TextField} from "@mui/material";
 import DialogTitle from "@mui/material/DialogTitle";
 import React, {Fragment, useState} from "react";
 import axios from "axios";
-import {Versions} from "../Models.ts";
 
 
 
@@ -23,11 +22,12 @@ export default function CustomAdd({setversion}: Props) {
         setOpen(false);
     };
 
+    // @ts-ignore
     return (
         <Fragment>
-            <AddIcon variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon />}>
                 Open form dialog
-            </AddIcon>
+            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}

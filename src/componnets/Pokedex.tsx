@@ -1,7 +1,7 @@
-import {PoedexPokemon, PokemonSpecies, Versions} from "../Models.ts";
+import {PoedexPokemon, Versions} from "../Models.ts";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Accordion, AccordionDetails, AccordionSummary, Dialog, Typography} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Dialog} from "@mui/material";
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
@@ -17,7 +17,7 @@ import "./Pokedex.css"
 interface Props {
     version: Versions|undefined;
     update: number;
-    setUpdate: ()=>{};
+    setUpdate: ()=>void;
 }
 export interface SimpleDialogProps {
     open: boolean;
@@ -103,11 +103,11 @@ export default function Pokedex({version, update, setUpdate}: Props) {
                 console.log(resp.status)
             })
         }
-        setUpdate(it => it+1)
+        setUpdate()
     };
     const [expanded, setExpanded] = React.useState<string | false>('panel1');
     const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+        (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
             setExpanded(newExpanded ? panel : false);
         };
 

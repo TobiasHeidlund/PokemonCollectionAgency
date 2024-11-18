@@ -1,7 +1,7 @@
-import {Region, Versions,toCollect} from "../Models.ts";
+import {Versions,toCollect} from "../Models.ts";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Accordion, AccordionDetails, AccordionSummary, Typography} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import * as React from "react";
 
 interface Props {
@@ -25,12 +25,13 @@ export default function ToCollect({version,update }: Props) {
     }, [version,update]);
     const [expanded, setExpanded] = React.useState<string | false>('panel1');
     const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+        (panel: string) => (_event: React.SyntheticEvent, newExpanded: boolean) => {
             setExpanded(newExpanded ? panel : false);
         };
+    // @ts-ignore
     return(
         <Accordion className="accord" expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-            <AccordionSummary classname="sum" aria-controls="panel1d-content" id="panel1d-header">
+            <AccordionSummary component="a" className="sum" aria-controls="panel1d-content" id="panel1d-header">
                 <p className="typ">To Collected</p>
             </AccordionSummary>
             <AccordionDetails>

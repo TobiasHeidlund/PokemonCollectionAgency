@@ -301,7 +301,7 @@ function NavComponent() {
 
             </form>
             <div>
-        <ToCollect version={selectedVersion} region={selectedRegion} update={update}></ToCollect>
+        <ToCollect version={selectedVersion} update={update}></ToCollect>
         </div>
         </div>
         </section>
