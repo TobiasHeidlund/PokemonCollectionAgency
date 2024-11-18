@@ -62,6 +62,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 }
 
 export default function Pokedex({version, update, setUpdate}: Props) {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     let [toCollect, settoCollect] = useState<PoedexPokemon[]>([]);
     const [open, setOpen] = useState(false);
     const [currentEvoluions, setCurrentEvoluions] = useState<PoedexPokemon>();
@@ -69,7 +70,7 @@ export default function Pokedex({version, update, setUpdate}: Props) {
     useEffect(() => {
         settoCollect([])
         if (version) {
-            axios.get("http://localhost:8080/pokedex/collected?version=" + version.id).then((resp) => {
+            axios.get(`${API_BASE_URL}/pokedex/collected?version=` + version.id).then((resp) => {
                 console.log(resp.data)
                 let col = resp.data as PoedexPokemon[]
                 console.log(col)
@@ -98,7 +99,7 @@ export default function Pokedex({version, update, setUpdate}: Props) {
         setOpen(false);
         setCurrentEvoluions(undefined)
         if (value.length != 0){
-            axios.put("http://localhost:8080/pokedex/evolve?pokedexid=" + value[0] + "&tospecies="+value[1]).then((resp) => {
+            axios.put(`${API_BASE_URL}/pokedex/evolve?pokedexid=` + value[0] + "&tospecies="+value[1]).then((resp) => {
                 console.log(resp.status)
             })
         }

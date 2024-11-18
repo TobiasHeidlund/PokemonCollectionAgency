@@ -58,14 +58,14 @@ function NavComponent() {
     let [maxProgress, setMaxProgress] = useState<number>(0);
     let [update, setUpdate] = useState<number>(0);
    // let [selectedPokemons, setSelectedPokemons] = useState<Map<EncounterMethodId,Map<Pokemon,Encounter[]>>>( new Map());
-
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 
     useEffect(() => {
 
         //GRAB Version
-        axios.get("http://localhost:8080/version").then((resp)=>{
+        axios.get(`${API_BASE_URL}/version`).then((resp)=>{
             let cversions: Versions[] = resp.data as Versions[];
             setSelectableVersions(cversions);
 
@@ -74,7 +74,7 @@ function NavComponent() {
     }, []);
     useEffect(() => {
         if(selectedRegion!= undefined) {
-            axios.get("http://localhost:8080/routes?route_id=" + String(selectedRegion.id)).then((resp) => {
+            axios.get(`${API_BASE_URL}/routes?route_id=` + String(selectedRegion.id)).then((resp) => {
                 setSelectableRoute(resp.data as Route[]);
 
             })
@@ -83,7 +83,7 @@ function NavComponent() {
 
     useEffect(() => {
         if(selectedRoute!= null) {
-            axios.get("http://localhost:8080/area?location_id=" + String(selectedRoute.id)).then((resp) => {
+            axios.get(`${API_BASE_URL}/area?location_id=` + String(selectedRoute.id)).then((resp) => {
                 setSelectedAreas(resp.data as Areas[]);
             })
         }
@@ -92,7 +92,7 @@ function NavComponent() {
     useEffect(()=>{
         if(selectedVersion != null){
            setSelectedRegion(selectedVersion.versionGroup.generationId.region);
-           axios.get("http://localhost:8080/pokedex/currentcompeate?version=" + selectedVersion?.id).then((resp) => {
+           axios.get(`${API_BASE_URL}/pokedex/currentcompeate?version=` + selectedVersion?.id).then((resp) => {
                 setCurrentProgress(resp.data[0] as number);
                 setMaxProgress(resp.data[1] as number);
                 console.log(resp.data);
@@ -110,7 +110,7 @@ function NavComponent() {
         if(selectedAreas != undefined && selectedVersion!= undefined) {
             selectedAreas.forEach((it) => {
 
-                let adress = "http://localhost:8080/getPokemonsInArea?location_area_id=" + String(it.id) + "&version_id=" + selectedVersion.id
+                let adress = `${API_BASE_URL}/getPokemonsInArea?location_area_id=` + String(it.id) + "&version_id=" + selectedVersion.id
                 axios.get(adress).then((resp)=>{
                     const data = resp.data;
                     const newSelectedPokemons = new Map<EncounterMethodId, Map<Pokemon, Encounter[]>>();
@@ -168,14 +168,14 @@ function NavComponent() {
         
     }
     const addPokemon:React.MouseEventHandler<HTMLDivElement> = (target) => {
-        let adress = "http://localhost:8080/pokedex?pokemon_id="+target.currentTarget.id
+        let adress = `${API_BASE_URL}/pokedex?pokemon_id=`+target.currentTarget.id
         axios.put(adress).then(resp => (resp.status == 200)?(
             setUpdateSelectedPokemons(s => s+1)):console.log(resp.data))
         setUpdate(it => it+1)
     }
 
     const hasPokemon = (pokemon:Pokemon) => {
-        let address = "http://localhost:8080/pokedex?pokemon_id="+pokemon.id
+        let address = `${API_BASE_URL}/pokedex?pokemon_id=`+pokemon.id
         axios.get(address).then((resp) => {
             const newPokemon = resp.data as PoedexPokemon;
             setSelectedCollected((prev) => [...prev, newPokemon]);

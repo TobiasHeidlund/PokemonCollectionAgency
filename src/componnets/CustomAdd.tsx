@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function CustomAdd({setversion}: Props) {
-
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -38,7 +38,7 @@ export default function CustomAdd({setversion}: Props) {
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries((formData as any).entries());
                         const name = formJson.name;
-                        axios.put("http://localhost:8080/pokedex/identifier?identifier="+name).then(
+                        axios.put(`${API_BASE_URL}/pokedex/identifier?identifier=`+name).then(
                             (resp) => {
                                 if(resp.status != 200){
                                     alert("Failed To add")
